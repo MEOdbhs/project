@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="article.css">
+    <script src="theme.js"></script>
 </head>
 <body>
     <div class="cyber-grid-bg"></div>
@@ -18,7 +19,10 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             Return to Calendar
         </a>
-        <div id="selected-date-display" class="date-badge"></div>
+        <div class="nav-right">
+            <div id="selected-date-display" class="date-badge"></div>
+            <button class="theme-toggle js-toggle-mode" type="button" aria-pressed="false"></button>
+        </div>
     </nav>
 
     <main class="article-container" style="padding-top: 100px;">

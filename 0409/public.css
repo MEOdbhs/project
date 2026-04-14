@@ -9,6 +9,17 @@
     --hover-bg: rgba(0, 240, 255, 0.08);
 }
 
+:root[data-theme="light"] {
+    --bg-color: #ffffff;
+    --panel-bg: rgba(255, 255, 255, 0.75);
+    --panel-border: rgba(10, 10, 15, 0.12);
+    --text-primary: #0b0b10;
+    --text-secondary: rgba(11, 11, 16, 0.6);
+    --accent-neon: #0055ff;
+    --accent-dark-blue: #0027a8;
+    --hover-bg: rgba(0, 85, 255, 0.08);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -28,6 +39,67 @@ body {
     position: relative;
 }
 
+.theme-toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 1200;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--panel-border);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 0 4px rgba(0, 240, 255, 0.12);
+}
+
+:root[data-theme="light"] .theme-toggle:hover {
+    box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.12);
+}
+
+:root[data-theme="light"] .main-page-title,
+:root[data-theme="light"] .calendar-header h1,
+:root[data-theme="light"] .modal-title {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    filter: none;
+    color: var(--text-primary);
+}
+
+:root[data-theme="light"] .modal {
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+:root[data-theme="light"] .day.other-month {
+    color: rgba(11, 11, 16, 0.35);
+}
+
+:root[data-theme="light"] .day:not(.empty):not(.other-month) {
+    background: rgba(0, 0, 0, 0.035);
+}
+
+:root[data-theme="light"] .day.no-record:hover {
+    background: rgba(0, 0, 0, 0.035) !important;
+    color: var(--text-primary) !important;
+}
 
 .page-title-container {
     position: relative;

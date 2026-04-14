@@ -1,13 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    //更改主题
-    let toggleButton = document.querySelector('.js-toggle-mode');
-    if (toggleButton) {
-        toggleButton.addEventListener('click', function () {
-            document.body.classList.toggle('light-mode');
-        });
-    }
-
-
     const daysContainer = document.getElementById('days-container');
     const monthYearDisplay = document.getElementById('month-year-display');
     const prevMonthBtn = document.getElementById('prev-month');
