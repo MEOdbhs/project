@@ -230,7 +230,7 @@
           const img = new Image();
           img.decoding = "async";
           img.loading = "eager";
-          img.crossOrigin = "anonymous";
+          img.crossOrigin = "Anonymous";
           img.onload = () => resolve(img);
           img.onerror = () => reject(new Error("load failed: " + src));
           img.src = src;
