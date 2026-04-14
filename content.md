@@ -233,6 +233,9 @@ The space felt layered instead of random.
 Pull Quote
 
 Repetition made the place feel less public and a little more personal.
+
+⸻
+
 DAY 3
 
 Label
