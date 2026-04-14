@@ -47,32 +47,27 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    height: 34px;
-    padding: 0 12px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--panel-border);
-    color: var(--text-primary);
+    padding: 0;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.theme-toggle-icon {
+    width: 40px;
+    height: auto;
+    display: block;
 }
 
 .theme-toggle:hover {
-    transform: translateY(-1px);
-    border-color: var(--accent-neon);
-    box-shadow: 0 0 0 4px rgba(0, 240, 255, 0.12);
+    transform: translateY(-2px) scale(1.05);
 }
 
-:root[data-theme="light"] .theme-toggle:hover {
-    box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.12);
+/* If the image is dark and needs to be inverted in dark mode (or vice-versa), we can adjust filter. */
+/* Assuming the image is white/light and needs to be black in light mode: */
+:root[data-theme="light"] .theme-toggle-icon {
+    filter: invert(1);
 }
 
 :root[data-theme="light"] .main-page-title,

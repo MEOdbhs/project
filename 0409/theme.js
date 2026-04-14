@@ -29,7 +29,6 @@
         const toggles = document.querySelectorAll('.js-toggle-mode');
         const isLight = theme === THEMES.light;
         toggles.forEach((btn) => {
-            btn.textContent = isLight ? 'NIGHT' : 'DAY';
             btn.setAttribute('aria-pressed', String(isLight));
         });
     }
