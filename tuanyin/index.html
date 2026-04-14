@@ -211,8 +211,10 @@
       </div>
     </div>
 
-    <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
     <script>
+      const regionsRoot = document.getElementById("regions");
+      const status = document.getElementById("status");
+
       const regionFiles = [
         "亚坛高原-Altus Plateau.png",
         "宁姆格福-Limgrave.png",
@@ -223,112 +225,6 @@
 
       function onRegionClick(filename) {
         console.log("region click:", filename);
-      }
-
-      function loadImg(src) {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.decoding = "async";
-          img.loading = "eager";
-          img.crossOrigin = "Anonymous";
-          img.onload = () => resolve(img);
-          img.onerror = () => reject(new Error("load failed: " + src));
-          img.src = src;
-        });
-      }
-
-      function drawToCanvas(img, width, height) {
-        const canvas = document.createElement("canvas");
-        canvas.width = Math.max(1, Math.round(width));
-        canvas.height = Math.max(1, Math.round(height));
-        const ctx = canvas.getContext("2d", { willReadFrequently: true });
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        return canvas;
-      }
-
-      function toEdgeMat(canvas) {
-        const src = cv.imread(canvas);
-        const gray = new cv.Mat();
-        cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-        const blur = new cv.Mat();
-        cv.GaussianBlur(gray, blur, new cv.Size(3, 3), 0, 0, cv.BORDER_DEFAULT);
-        const edges = new cv.Mat();
-        cv.Canny(blur, edges, 40, 130);
-        src.delete();
-        gray.delete();
-        blur.delete();
-        return edges;
-      }
-
-      async function locateRegions() {
-        const mapShell = document.getElementById("mapShell");
-        const mapBg = document.getElementById("mapBg");
-        const regionsRoot = document.getElementById("regions");
-        const status = document.getElementById("status");
-
-        await new Promise((r) => {
-          if (mapBg.complete && mapBg.naturalWidth) return r();
-          mapBg.addEventListener("load", r, { once: true });
-        });
-
-        const displayW = mapShell.clientWidth;
-        const displayH = mapShell.clientHeight;
-        const scale = displayW / mapBg.naturalWidth;
-
-        const baseCanvas = drawToCanvas(mapBg, displayW, displayH);
-        const baseEdges = toEdgeMat(baseCanvas);
-
-        const results = [];
-        for (const filename of regionFiles) {
-          const src = "./assets/" + filename;
-          const img = await loadImg(src);
-          const tW = img.naturalWidth * scale;
-          const tH = img.naturalHeight * scale;
-          const tCanvas = drawToCanvas(img, tW, tH);
-          const templEdges = toEdgeMat(tCanvas);
-
-          const resultCols = baseEdges.cols - templEdges.cols + 1;
-          const resultRows = baseEdges.rows - templEdges.rows + 1;
-          const result = new cv.Mat(resultRows, resultCols, cv.CV_32FC1);
-          cv.matchTemplate(baseEdges, templEdges, result, cv.TM_CCOEFF_NORMED);
-          const mm = cv.minMaxLoc(result);
-
-          results.push({
-            filename,
-            x: mm.maxLoc.x,
-            y: mm.maxLoc.y,
-            w: Math.round(tW),
-            h: Math.round(tH),
-            score: mm.maxVal,
-          });
-
-          result.delete();
-          templEdges.delete();
-        }
-
-        baseEdges.delete();
-
-        console.table(results);
-
-        regionsRoot.innerHTML = "";
-        for (const r of results) {
-          const el = document.createElement("img");
-          el.className = "region";
-          el.src = "./assets/" + r.filename;
-          el.alt = r.filename;
-          el.style.left = r.x + "px";
-          el.style.top = r.y + "px";
-          el.style.width = r.w + "px";
-          el.style.height = r.h + "px";
-          el.dataset.filename = r.filename;
-          el.dataset.score = String(r.score);
-          el.addEventListener("click", () => onRegionClick(r.filename));
-          regionsRoot.appendChild(el);
-        }
-
-        status.dataset.state = "ready";
-        status.querySelector("span").textContent = "Ready";
       }
 
       function setupTooltip() {
@@ -374,39 +270,30 @@
         );
       }
 
-      function waitForCv() {
-        return new Promise((resolve, reject) => {
-          const startedAt = Date.now();
-          const timer = setInterval(() => {
-            if (typeof cv !== "undefined" && cv && cv.Mat) {
-              clearInterval(timer);
-              resolve();
-              return;
-            }
-            if (typeof cv !== "undefined" && cv && !cv.Mat && cv.onRuntimeInitialized) {
-              clearInterval(timer);
-              cv.onRuntimeInitialized = resolve;
-              return;
-            }
-            if (Date.now() - startedAt > 15000) {
-              clearInterval(timer);
-              reject(new Error("opencv timeout"));
-            }
-          }, 50);
-        });
-      }
-
-      async function boot() {
+      function boot() {
         setupTooltip();
-        const status = document.getElementById("status");
-        try {
-          await waitForCv();
-          await locateRegions();
-        } catch (err) {
-          console.error(err);
-          status.dataset.state = "fail";
-          status.querySelector("span").textContent = "Failed";
+        
+        regionsRoot.innerHTML = "";
+        for (const filename of regionFiles) {
+          const el = document.createElement("img");
+          el.className = "region";
+          el.src = "./assets/" + filename;
+          el.alt = filename;
+          // Calculate precise positions based on 6000x6000 region overlaying 15175x14280 base map
+          // 15175 / 15175 = 100% width
+          // 15175 / 14280 = 106.266% height
+          // (14280 - 15175) / 2 = -447.5 -> -447.5 / 14280 = -3.133% top
+          el.style.left = "0%";
+          el.style.top = "-3.133%";
+          el.style.width = "100%";
+          el.style.height = "106.266%";
+          el.dataset.filename = filename;
+          el.addEventListener("click", () => onRegionClick(filename));
+          regionsRoot.appendChild(el);
         }
+
+        status.dataset.state = "ready";
+        status.querySelector("span").textContent = "Ready";
       }
 
       boot();
