@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Home</title>
+  <script src="scripts.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      color: #fff;
+      font-family: Inter, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #0a0a0a;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .home-shell {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .change-box {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 24px;
+    }
+
+    .change-box img {
+      width: 40px;
+      height: 22px;
+      cursor: pointer;
+    }
+
+    .title {
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: -0.6px;
+      margin-bottom: 16px;
+    }
+
+    .desc {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr;
+    }
+
+    .nav-btn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 20px;
+      line-height: 1.2;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      border-color: #00ff88;
+    }
+
+    body.light-mode {
+      background: #fff;
+    }
+
+    body.light-mode * {
+      color: #171717;
+    }
+
+    body.light-mode .desc {
+      color: rgba(23, 23, 23, 0.72);
+    }
+
+    body.light-mode .nav-btn {
+      border-color: rgba(37, 99, 235, 0.35);
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    body.light-mode .nav-btn:hover {
+      border-color: #2563eb;
+    }
+
+    @media (min-width: 860px) {
+      .actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="home-shell">
+    <div class="change-box">
+      <img src="./change.png" alt="" class="js-toggle-mode" />
+    </div>
+    <div class="title">Interview Index</div>
+    <div class="desc">Choose a page to open.</div>
+    <div class="actions">
+      <a class="nav-btn" href="./Lesley.html">Lesley</a>
+      <a class="nav-btn" href="./jack.html">jack</a>
+    </div>
+  </div>
+</body>
+
+</html>

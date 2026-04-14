@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details - Reserved Page</title>
+    <link rel="stylesheet" href="public.css" />
+  </head>
+  <body>
+    <!-- 背景 -->
+    <div class="cyber-grid"></div>
+
+    <!-- 子页面主体内容预留区 -->
+    <div class="subpage-container calendar-wrapper">
+      <h1 class="title-glow" id="selected-date-display">No date selected</h1>
+      <p style="color: var(--text-secondary); margin-bottom: 30px">内容</p>
+      <a href="index.html" class="back-btn">Back to Calendar</a>
+    </div>
+
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const dateParam = params.get("date");
+
+        const displayElement = document.getElementById("selected-date-display");
+        if (dateParam) {
+          displayElement.textContent = dateParam;
+        }
+      });
+    </script>
+  </body>
+</html>

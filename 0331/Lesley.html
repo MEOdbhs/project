@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesley</title>
+  <script src="scripts.js"></script>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+  }
+
+  :root {
+    --color-bg: #0a0a0a;
+    --color-text: #fff;
+    .light-mode {
+      --color-bg: #fff;
+      --color-text: #171717 ;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    padding: 0 20px;
+  }
+
+  .page-shell {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+
+    div {
+      margin-left: auto;
+
+      span {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .change-box {
+    display: flex;
+    justify-content: space-between;
+    margin: 36px 0 10px;
+
+    img {
+      width: 40px;
+      height: 22px;
+    }
+  }
+
+  .label {
+    color: #00ff88;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    /* 150% */
+    letter-spacing: 2.117px;
+  }
+
+  .title {
+    color: #fff;
+    font-family: Inter;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 39.6px;
+    /* 110% */
+    letter-spacing: -0.531px;
+
+    span {
+      color: #00ff88;
+    }
+
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 20%;
+      height: 2px;
+      background-color: #00ff88;
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+    }
+  }
+
+  .BIO {
+    color: #00ff88;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    /* 150% */
+    letter-spacing: 2.117px;
+    margin-top: 64px;
+    margin: 64px 0 32px;
+  }
+
+  .content {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    /* 162.5% */
+    letter-spacing: -0.312px;
+    margin: 16px 0 64px;
+  }
+
+  .bio-layout .content {
+    margin: 16px 0 64px;
+  }
+
+  .like {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: Inter;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 25px;
+    /* 125% */
+    letter-spacing: -0.449px;
+    padding: 0 26px;
+    position: relative;
+
+    img {
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      right: 6px;
+      top: -6px;
+      z-index: 11;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: 2px;
+      height: 100%;
+      background-color: #00ff88;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .p-label {
+    color: rgba(0, 255, 136, 0.2);
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px;
+    /* 120% */
+    letter-spacing: 0.396px;
+    margin-bottom: 12px;
+  }
+
+  .m-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24.75px;
+    /* 137.5% */
+    letter-spacing: -0.439px;
+    margin-bottom: 14px;
+  }
+
+  .m-content {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.75px;
+    /* 162.5% */
+    letter-spacing: -0.15px;
+    margin-bottom: 22px;
+    position: relative;
+
+    img {
+      position: absolute;
+      left: -20px;
+      top: 0px;
+      width: 50px;
+      height: 50px;
+      opacity: 0;
+      transform: scale(0.5) rotate(-10deg);
+      filter: brightness(0.8);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      pointer-events: none;
+      border-radius: 8px;
+      z-index: 0;
+      animation: borderMove 15s linear infinite;
+
+    }
+
+    &:hover img {
+      opacity: 0.7;
+      transform: scale(1.05) rotate(0deg);
+      filter: brightness(1.1);
+    }
+  }
+
+  @keyframes borderMove {
+ 0% {
+    left: -20px;        
+  }
+  50% {
+    left: calc(100% - 50px); 
+  }
+  100% {
+    left: -20px;         
+  }
+  }
+
+  .box {
+    display: flex;
+    padding: 25px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.05);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 22.75px;
+    /* 162.5% */
+    letter-spacing: -0.15px;
+    margin-bottom: 16px;
+  }
+
+  .insights-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .insights-grid .box {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .title {
+      padding-left: 20px;
+    }
+
+    .title span {
+      display: block;
+    }
+
+    /* .title::after {
+      width: 2px;
+      height: 100%;
+      left: 0;
+      top: 0;
+      bottom: auto;
+    } */
+
+    .bio-layout {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      column-gap: 40px;
+      align-items: start;
+      margin: 64px 0;
+    }
+
+    .bio-layout .BIO {
+      margin: 0;
+    }
+
+    .bio-layout .content {
+      margin: 0;
+    }
+
+    .m-content-three-lines {
+      max-width: 40ch;
+    }
+
+    .insights-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    padding-bottom: 68px;
+
+    .img-box {
+      display: flex;
+      width: 40px;
+      height: 40px;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      margin-right: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      margin-bottom: 24px;
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .timer {
+    color: rgba(255, 255, 255, 0.40);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    /* 133.333% */
+  }
+
+  body.light-mode {
+    background-color: #fff;
+  }
+
+  body.light-mode * {
+    color: #171717;
+  }
+
+  body.light-mode .label,
+  body.light-mode .title span,
+  body.light-mode .BIO {
+    color: #2563EB;
+  }
+
+  body.light-mode .like::after,
+  body.light-mode .title::after {
+    background-color: #2563EB;
+  }
+
+  body.light-mode .p-label {
+    color: rgba(37, 99, 235, 0.20);
+  }
+</style>
+
+<body>
+  <div class="page-shell">
+  <div class="header">
+    <span>Lesley</span>
+    <div>
+      <span>Interviews</span>
+      <span>About</span>
+      <span>Contact</span>
+    </div>
+  </div>
+  <div class="change-box">
+    <span></span>
+    <img src="./change.png" alt="" class="js-toggle-mode"/>
+  </div>
+  <div class="label">INTERVIEW / 001</div>
+  <div class="title">Inside the Mind of an <span>Interaction Design</span> Student</div>
+  <div class="bio-layout">
+  <div class="BIO">BIO</div>
+  <div class="content">
+    Lesley is a 7th-term Interaction Design student at ArtCenter College of Design. She is interested in user research
+    and problem-solving through design, focusing on turning
+    user insights into clear and practical solutions. Her work often explores how thoughtful design can improve everyday
+    experiences.
+  </div>
+  </div>
+  <div class="like"><img src="./Icon.png" alt="" /> I like solving real problems for people and turning research into
+    simple solutions.</div>
+  <div class="BIO">THE CONVERSATION</div>
+  <div class="p-label">01</div>
+  <div class="m-title">Why did you decide to study at ArtCenter?</div>
+  <div class="m-content">
+    I chose ArtCenter because it's a well-known design school, and its Interaction Design program is highly ranked. I
+    wanted strong training and real-world projects, so ArtCenter
+    felt like the right place.
+  </div>
+
+  <div class="p-label">02</div>
+  <div class="m-title">Why did you choose to study interaction design?</div>
+  <div class="m-content m-content-three-lines">
+    I like solving real problems for people. I enjoy doing research, understanding their needs, and turning that into
+    simple solutions. I also like testing my ideas through
+    research.
+    <img src="./mao.jpg" alt="">
+  </div>
+  <div class="p-label">03</div>
+  <div class="m-title">What is the most difficult thing when taking the class?</div>
+  <div class="m-content">
+    Group work at the beginning. I'm more introverted, so I need some time to feel comfortable with new teammates. At
+    first, I'm quieter, which can sometimes cause small misunderstandings even though I'm fully engaged and
+    contributing.
+  </div>
+  <div class="p-label">04</div>
+  <div class="m-title">How do you overcome difficulties when you encounter them?</div>
+  <div class="m-content">
+    I give myself time. After a few meetings, I feel more comfortable and start communicating more. Once trust is built,
+    teamwork becomes much easier.
+  </div>
+  <div class="p-label">05</div>
+    <div class="m-title">Have you ever chosen other majors?</div>
+    <div class="m-content">
+      No. I've always been clear about what I want to do.
+    </div>
+    <div class="BIO">KEY INSIGHTS</div>
+    <div class="insights-grid">
+    <div class="box">
+      <img src="./Icon.png" alt="">
+      <div>ArtCenter felt like the right place because it offers strong training and real-world projects.</div>
+    </div>
+    <div class="box">
+      <img src="./Icon.png" alt="">
+      <div>At first I'm quiet in group work, but once trust is built, teamwork becomes much easier.</div>
+    </div>
+
+    <div class="box">
+      <img src="./Icon.png" alt="">
+      <div>I need a little time to feel comfortable with new teammates, but that process helps build better
+        collaboration.</div>
+    </div>
+
+    <div class="box">
+      <img src="./Icon.png" alt="">
+      <div>I've always been clear about what I want to do.</div>
+    </div>
+    </div>
+
+    <div class="footer">
+      <div class="BIO">CONNECT WITH LESLEY</div>
+      <div style="display: flex;">
+        <div class="img-box">
+          <img src="./Icon2.png" alt="">
+        </div>
+        <div class="img-box">
+          <img src="./Icon (1).png" alt="">
+        </div>
+        <div class="img-box">
+          <img src="./Icon (2).png" alt="">
+        </div>
+      </div>
+      <div class="timer">
+        Interview / 001
+      </div>
+      <div class="timer">
+        March 26, 2026
+      </div>
+    </div>
+  </div>
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.querySelector('.js-toggle-mode');
+    const themeIcons = document.querySelectorAll('img[src="./Icon.png"], img[src="./Icon3.png"]');
+
+    function syncThemeIcons() {
+      const isLightMode = document.body.classList.contains('light-mode');
+      themeIcons.forEach(function (icon) {
+        icon.setAttribute('src', isLightMode ? './Icon3.png' : './Icon.png');
+      });
+    }
+
+    if (toggleButton) {
+      toggleButton.addEventListener('click', function () {
+        setTimeout(syncThemeIcons, 0);
+      });
+    }
+
+    syncThemeIcons();
+  });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jack</title>
+  <script src="scripts.js"></script>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+  }
+
+  :root {
+    --color-bg: #0a0a0a;
+    --color-text: #fff;
+    .light-mode {
+      --color-bg: #fff;
+      --color-text: #171717;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    padding: 0 20px;
+  }
+
+  .page-shell {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+
+    div {
+      margin-left: auto;
+
+      span {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .change-box {
+    display: flex;
+    justify-content: space-between;
+    margin: 36px 0 10px;
+
+    img {
+      width: 40px;
+      height: 22px;
+    }
+  }
+
+  .label {
+    color: #00ff88;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 2.117px;
+  }
+
+  .title {
+    color: #fff;
+    font-family: Inter;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 39.6px;
+    letter-spacing: -0.531px;
+
+    span {
+      color: #00ff88;
+    }
+
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 20%;
+      height: 2px;
+      background-color: #00ff88;
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+    }
+  }
+
+  .BIO {
+    color: #00ff88;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 2.117px;
+    margin-top: 64px;
+    margin: 64px 0 32px;
+  }
+
+  .content {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.312px;
+    margin: 16px 0 64px;
+  }
+
+  .bio-layout .content {
+    margin: 16px 0 64px;
+  }
+
+  .like {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: Inter;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: -0.449px;
+    padding: 0 26px;
+    position: relative;
+
+    img {
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      right: 6px;
+      top: -6px;
+      z-index: 11;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: 2px;
+      height: 100%;
+      background-color: #00ff88;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .interview-photo-wrap {
+    margin: 18px 0 46px;
+  }
+
+  .interview-photo {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: block;
+  }
+
+  .p-label {
+    color: rgba(0, 255, 136, 0.2);
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 0.396px;
+    margin-bottom: 12px;
+  }
+
+  .m-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24.75px;
+    letter-spacing: -0.439px;
+    margin-bottom: 14px;
+  }
+
+  .m-content {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.75px;
+    letter-spacing: -0.15px;
+    margin-bottom: 22px;
+    position: relative;
+  }
+
+  .box {
+    display: flex;
+    padding: 25px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.05);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 22.75px;
+    letter-spacing: -0.15px;
+    margin-bottom: 16px;
+  }
+
+  .insights-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .insights-grid .box {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .title {
+      padding-left: 20px;
+    }
+
+    .title span {
+      display: block;
+    }
+
+    .bio-layout {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      column-gap: 40px;
+      align-items: start;
+      margin: 64px 0;
+    }
+
+    .bio-layout .BIO {
+      margin: 0;
+    }
+
+    .bio-layout .content {
+      margin: 0;
+    }
+
+    .insights-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    padding-bottom: 68px;
+
+    .img-box {
+      display: flex;
+      width: 40px;
+      height: 40px;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      margin-right: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      margin-bottom: 24px;
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .timer {
+    color: rgba(255, 255, 255, 0.40);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+  }
+
+  body.light-mode {
+    background-color: #fff;
+  }
+
+  body.light-mode * {
+    color: #171717;
+  }
+
+  body.light-mode .label,
+  body.light-mode .title span,
+  body.light-mode .BIO {
+    color: #2563EB;
+  }
+
+  body.light-mode .like::after,
+  body.light-mode .title::after {
+    background-color: #2563EB;
+  }
+
+  body.light-mode .p-label {
+    color: rgba(37, 99, 235, 0.20);
+  }
+</style>
+
+<body>
+  <div class="page-shell">
+    <div class="header">
+      <span>Jack</span>
+      <div>
+        <span>Interviews</span>
+        <span>About</span>
+        <span>Contact</span>
+      </div>
+    </div>
+    <div class="change-box">
+      <span></span>
+      <img src="./change.png" alt="" class="js-toggle-mode" />
+    </div>
+    <div class="label">INTERVIEW / 002</div>
+    <div class="title">Inside the Mind of <span>Jack</span></div>
+    <div class="bio-layout">
+      <div class="BIO">BIO</div>
+      <div class="content">
+        Jack is currently reflecting on identity, emotions, and long-term direction. He often thinks about how to adjust
+        expectations, treat himself with more kindness, and keep moving toward a balanced and grounded life.
+      </div>
+    </div>
+    <div class="interview-photo-wrap">
+      <img src="./interview1.jpg" alt="" class="interview-photo" />
+    </div>
+    <div class="like"><img src="./Icon.png" alt="" /> I want to treat myself better while staying clear about what matters
+      most at this stage.</div>
+
+    <div class="BIO">THE CONVERSATION</div>
+
+    <div class="p-label">01</div>
+    <div class="m-title">What is the one thing you’ve been thinking about the most recently?</div>
+    <div class="m-content">
+      I’ve been thinking about who I am now, what I should do, how I should think, and also what I’m going to eat
+      tomorrow 🤔.
+    </div>
+
+    <div class="p-label">02</div>
+    <div class="m-title">What is the biggest source of stress in your life right now?</div>
+    <div class="m-content">
+      I put too much pressure on myself that doesn’t really belong to me, and my expectations for myself are too high.
+      When I can’t reach them, I overthink a lot and feel a lot of stress.
+    </div>
+
+    <div class="p-label">03</div>
+    <div class="m-title">What do you think you are lacking the most right now?</div>
+    <div class="m-content">
+      Honestly, I’m not really lacking anything, but maybe I’m missing a stable intimate relationship.
+    </div>
+
+    <div class="interview-photo-wrap">
+      <img src="./interview2.png" alt="" class="interview-photo" />
+    </div>
+
+    <div class="p-label">04</div>
+    <div class="m-title">How do you usually adjust yourself when you’re in a bad mood?</div>
+    <div class="m-content">
+      When I’m in a bad mood, I usually ask my friends to go out with me and relax. Sometimes I play games I like or
+      watch anime to distract myself.
+    </div>
+
+    <div class="p-label">05</div>
+    <div class="m-title">What do you think people your age are most likely to feel anxious about right now?</div>
+    <div class="m-content">
+      I think it’s still about wanting to get into a relationship too much, not having a clear understanding of
+      themselves, appearance anxiety, and feeling confused about the future.
+    </div>
+
+    <div class="p-label">06</div>
+    <div class="m-title">What is the one thing you look forward to most in the future?</div>
+    <div class="m-content">
+      After graduating and going back to China, I hope I can buy a car that I really want.
+    </div>
+
+    <div class="p-label">07</div>
+    <div class="m-title">What part of yourself do you want to change the most right now?</div>
+    <div class="m-content">
+      In the past, I was too strict with myself. I want to treat myself better, and I also want to improve my
+      procrastination.
+    </div>
+
+    <div class="p-label">08</div>
+    <div class="m-title">Among love, friendship, and academics, which is the most important to you at this stage?</div>
+    <div class="m-content">
+      Academics comes first. As for friendship and love, I don’t think they are necessities for me, more like something
+      that adds balance to life. But if I do have one, I still hope for a stable relationship.
+    </div>
+
+    <div class="p-label">09</div>
+    <div class="m-title">Do you have a thought that others may not really understand, but that you care about deeply?</div>
+    <div class="m-content">
+      Yes. I always feel that people can never completely understand each other. If they could, there probably wouldn’t
+      be wars in the world. I think a lot about the future and the present, but sometimes my overthinking leads to
+      strange or even childish thoughts. I don’t usually share them with others because I’m afraid they won’t understand
+      me, but I do care about them a lot.
+    </div>
+
+    <div class="p-label">10</div>
+    <div class="m-title">If you could say one sentence to yourself from a year ago, what would it be?</div>
+    <div class="m-content">
+      Just keep living like this. I’m actually quite satisfied with the life waiting for you in the future.
+    </div>
+
+    <div class="interview-photo-wrap">
+      <img src="./interview3.jpg" alt="" class="interview-photo" />
+    </div>
+
+    <div class="BIO">KEY INSIGHTS</div>
+    <div class="insights-grid">
+      <div class="box">
+        <img src="./Icon.png" alt="">
+        <div>“I put too much pressure on myself, and when I can’t reach my expectations, I start to overthink.”</div>
+      </div>
+      <div class="box">
+        <img src="./Icon.png" alt="">
+        <div>“Academics comes first for me, while friendship and love feel more like something that adds balance to
+          life.”</div>
+      </div>
+      <div class="box">
+        <img src="./Icon.png" alt="">
+        <div>“Sometimes I think too much about the future and the present, but I’m afraid other people won’t really
+          understand me.”</div>
+      </div>
+      <div class="box">
+        <img src="./Icon.png" alt="">
+        <div>“I want to treat myself better and stop being so strict with myself.”</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="BIO">CONNECT WITH JACK</div>
+      <div style="display: flex;">
+        <div class="img-box">
+          <img src="./Icon2.png" alt="">
+        </div>
+        <div class="img-box">
+          <img src="./Icon (1).png" alt="">
+        </div>
+        <div class="img-box">
+          <img src="./Icon (2).png" alt="">
+        </div>
+      </div>
+      <div class="timer">
+        Interview / 002
+      </div>
+      <div class="timer">
+        April 01, 2026
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleButton = document.querySelector('.js-toggle-mode');
+      const themeIcons = document.querySelectorAll('img[src="./Icon.png"], img[src="./Icon3.png"]');
+
+      function syncThemeIcons() {
+        const isLightMode = document.body.classList.contains('light-mode');
+        themeIcons.forEach(function (icon) {
+          icon.setAttribute('src', isLightMode ? './Icon3.png' : './Icon.png');
+        });
+      }
+
+      if (toggleButton) {
+        toggleButton.addEventListener('click', function () {
+          setTimeout(syncThemeIcons, 0);
+        });
+      }
+
+      syncThemeIcons();
+    });
+  </script>
+</body>
+
+</html>

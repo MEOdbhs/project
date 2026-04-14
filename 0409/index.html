@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Cyber Calendar</title>
+    <link rel="stylesheet" href="public.css">
+</head>
+<body>
+   
+    <div class="cyber-grid"></div>
+
+    <div class="page-title-container">
+        <h1 class="main-page-title">7 days on one bench</h1>
+    </div>
+
+
+    <div class="calendar-wrapper">
+        <header class="calendar-header">
+            <button id="prev-month" class="nav-btn">&lt;</button>
+            <h1 id="month-year-display">Loading...</h1>
+            <button id="next-month" class="nav-btn">&gt;</button>
+        </header>
+        
+        <div class="calendar-grid">
+           
+            <div class="weekdays">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            
+            
+            <div class="days" id="days-container"></div>
+        </div>
+    </div>
+
+    <script src="public.js"></script>
+</body>
+</html>
