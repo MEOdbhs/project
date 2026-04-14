@@ -1,33 +1,280 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Details - Reserved Page</title>
-    <link rel="stylesheet" href="public.css" />
-  </head>
-  <body>
-    <!-- 背景 -->
-    <div class="cyber-grid"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observation Log</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="article.css">
+</head>
+<body>
+    <div class="cyber-grid-bg"></div>
+    <div class="noise-overlay"></div>
+    
+    <nav class="top-nav">
+        <a href="index.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Return to Calendar
+        </a>
+        <div id="selected-date-display" class="date-badge"></div>
+    </nav>
 
-    <!-- 子页面主体内容预留区 -->
-    <div class="subpage-container calendar-wrapper">
-      <h1 class="title-glow" id="selected-date-display">No date selected</h1>
-      <p style="color: var(--text-secondary); margin-bottom: 30px">内容</p>
-      <a href="index.html" class="back-btn">Back to Calendar</a>
-    </div>
+    <main class="article-container" style="padding-top: 100px;">
+        
+            <section id="day-1" class="day-section" style="display: none;">
+                <div class="container">
+                    <div class="day-card">
+                        <div class="day-header">
+                            <h3 class="day-title">DAY 1</h3>
+                            <div class="day-meta">10:00 AM<br>Cool and clear</div>
+                        </div>
+                        <div class="day-content-grid">
+                            <div class="obs-block heard-block">
+                                <h4>Heard</h4>
+                                <ul><li>A bicycle bell behind me.</li><li>Shoes brushing across the pavement.</li><li>A bus stopping and releasing air.</li><li>Leaves scraping the ground.</li><li>Two students laughing as they passed.</li><li>A distant airplane.</li><li>Someone opening food nearby.</li><li>A car door shutting hard.</li><li>Birds calling from above.</li><li>Wind moving through dry branches.</li></ul>
+                            </div>
+                            <div class="obs-block saw-block">
+                                <h4>Saw</h4>
+                                <div class="obs-text"><p>At first, the bench felt ordinary.</p><p>Almost invisible.</p><p>Sunlight touched only one side.</p><p>The other half stayed in shadow.</p><p>A plastic cup rested near one of its legs.</p><p>People crossed the space quickly,</p><p>as if the bench belonged only to passing time.</p></div>
+                            </div>
+                            <div class="obs-block met-block">
+                                <h4>Met</h4>
+                                <div class="obs-text"><p>No direct conversation.</p><p>One student slowed down and looked at me briefly.</p><p>Someone wearing headphones passed by twice.</p></div>
+                            </div>
+                            <div class="obs-block thought-block">
+                                <h4>Thought</h4>
+                                <div class="obs-text"><p>I felt slightly awkward sitting still on purpose.</p><p>Without my phone, time stretched.</p><p>I kept waiting for something important to happen.</p><p>Nothing dramatic did.</p><p>Instead, I noticed how full silence already was.</p></div>
+                            </div>
+                        </div>
+                        <div class="pull-quote">
+                            <blockquote>"The place seemed ordinary only because I usually move through it too fast to notice it."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="day-2" class="day-section" style="display: none;">
+                <div class="container">
+                    <div class="day-card">
+                        <div class="day-header">
+                            <h3 class="day-title">DAY 2</h3>
+                            <div class="day-meta">10:00 AM<br>Slightly warmer</div>
+                        </div>
+                        <div class="day-content-grid">
+                            <div class="obs-block heard-block">
+                                <h4>Heard</h4>
+                                <ul><li>A skateboard rattling over cracks.</li><li>A short phone ringtone.</li><li>A bird dropping near the trash can.</li><li>Low conversation from two people standing nearby.</li><li>A bus engine idling.</li><li>The soft drag of a backpack against the bench.</li><li>Footsteps in different rhythms.</li><li>A dog tag jingling.</li><li>A sudden cough.</li><li>Wind moving more softly than yesterday.</li></ul>
+                            </div>
+                            <div class="obs-block saw-block">
+                                <h4>Saw</h4>
+                                <div class="obs-text"><p>The same plastic cup was still there.</p><p>The light felt warmer.</p><p>It spread farther across the ground.</p><p>A dog stopped to sniff the grass.</p><p>More people seemed willing to slow down.</p><p>The place felt less cold,</p><p>less distant,</p><p>more available.</p></div>
+                            </div>
+                            <div class="obs-block met-block">
+                                <h4>Met</h4>
+                                <div class="obs-text"><p>Someone asked,</p><p>“Is anyone sitting here?”</p><p>They sat at the far end for less than a minute.</p><p>A dog walker smiled without speaking.</p><p>The same headphones person appeared again.</p></div>
+                            </div>
+                            <div class="obs-block thought-block">
+                                <h4>Thought</h4>
+                                <div class="obs-text"><p>I felt less self-conscious today.</p><p>The bench already carried a slight sense of routine.</p><p>I started noticing timing,</p><p>not just isolated sounds.</p><p>The space felt layered instead of random.</p></div>
+                            </div>
+                        </div>
+                        <div class="pull-quote">
+                            <blockquote>"Repetition made the place feel less public and a little more personal."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="day-3" class="day-section" style="display: none;">
+                <div class="container">
+                    <div class="day-card">
+                        <div class="day-header">
+                            <h3 class="day-title">DAY 3</h3>
+                            <div class="day-meta">10:00 AM<br>Cloudy</div>
+                        </div>
+                        <div class="day-content-grid">
+                            <div class="obs-block heard-block">
+                                <h4>Heard</h4>
+                                <ul><li>Softer footsteps on damp ground.</li><li>A short burst of laughter from far away.</li><li>A rolling cart squeaking.</li><li>A bird pecking near the bench.</li><li>A zipper closing.</li><li>A motorcycle in the distance.</li><li>Someone saying, “wait for me.”</li><li>Fabric rustling.</li><li>The faint hum of traffic.</li><li>Wind with a lower, colder tone.</li></ul>
+                            </div>
+                            <div class="obs-block saw-block">
+                                <h4>Saw</h4>
+                                <div class="obs-text"><p>Without direct sunlight,</p><p>the space looked flatter.</p><p>Colors felt muted.</p><p>The bench appeared less welcoming,</p><p>even though it had not changed.</p><p>Fewer people lingered.</p><p>Most moved quickly,</p><p>shoulders slightly raised against the cold.</p></div>
+                            </div>
+                            <div class="obs-block met-block">
+                                <h4>Met</h4>
+                                <div class="obs-text"><p>No direct interaction.</p><p>But I began recognizing movement patterns.</p><p>One person always walked fast without looking up.</p><p>Another paused near the same tree before moving on.</p><p>The place was beginning to collect recurring characters.</p></div>
+                            </div>
+                            <div class="obs-block thought-block">
+                                <h4>Thought</h4>
+                                <div class="obs-text"><p>Today felt less like collecting material</p><p>and more like entering a mood.</p><p>Weather changed the emotional tone of the place.</p><p>I also realized I was starting to wait for familiar sounds,</p><p>almost as if I knew the scene already.</p></div>
+                            </div>
+                        </div>
+                        <div class="pull-quote">
+                            <blockquote>"The same bench can feel completely different when the light disappears."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="day-4" class="day-section" style="display: none;">
+                <div class="container">
+                    <div class="day-card">
+                        <div class="day-header">
+                            <h3 class="day-title">DAY 4</h3>
+                            <div class="day-meta">10:00 AM<br>Bright and windy</div>
+                        </div>
+                        <div class="day-content-grid">
+                            <div class="obs-block heard-block">
+                                <h4>Heard</h4>
+                                <ul><li>Wind cutting through branches.</li><li>Leaves moving in bursts across the concrete.</li><li>A loud laugh close to the bench.</li><li>Fast footsteps.</li><li>A bicycle chain clicking.</li><li>Someone tapping a phone screen.</li><li>A backpack buckle hitting metal.</li><li>A car unlocking with a sharp electronic sound.</li><li>Birds calling more actively.</li><li>A distant siren fading slowly.</li></ul>
+                            </div>
+                            <div class="obs-block saw-block">
+                                <h4>Saw</h4>
+                                <div class="obs-text"><p>The wind made everything look active.</p><p>Tree shadows kept moving.</p><p>Loose paper shifted across the ground.</p><p>The bench no longer felt still,</p><p>because everything around it was in motion.</p><p>Hair moved. Clothes moved. Shadows moved.</p><p>The whole scene felt restless.</p></div>
+                            </div>
+                            <div class="obs-block met-block">
+                                <h4>Met</h4>
+                                <div class="obs-text"><p>A student sat briefly to tie a shoe.</p><p>Another person dropped a receipt and kept walking.</p><p>I saw the headphones person again.</p><p>The place felt less anonymous because of that.</p></div>
+                            </div>
+                            <div class="obs-block thought-block">
+                                <h4>Thought</h4>
+                                <div class="obs-text"><p>Movement changed the way I listened.</p><p>Because the scene was more active,</p><p>I became more alert to short sounds and interruptions.</p><p>I also started wondering</p><p>whether I was observing the site more clearly,</p><p>or simply becoming attached to its repetition.</p></div>
+                            </div>
+                        </div>
+                        <div class="pull-quote">
+                            <blockquote>"The bench stayed still, but the day around it felt restless."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="day-5" class="day-section" style="display: none;">
+                <div class="container">
+                    <div class="day-card">
+                        <div class="day-header">
+                            <h3 class="day-title">DAY 5</h3>
+                            <div class="day-meta">10:00 AM<br>Mild and quiet</div>
+                        </div>
+                        <div class="day-content-grid">
+                            <div class="obs-block heard-block">
+                                <h4>Heard</h4>
+                                <ul><li>A soft phone conversation.</li><li>Hard-soled shoes clicking.</li><li>A bird landing on the bench.</li><li>Someone opening a drink can.</li><li>Distant traffic blending into a low hum.</li><li>A light cough.</li><li>Fabric brushing against fabric.</li><li>A backpack zipper opening and closing.</li><li>Someone dragging their feet slowly.</li><li>A brief pause in sound that made the next noise feel louder.</li></ul>
+                            </div>
+                            <div class="obs-block saw-block">
+                                <h4>Saw</h4>
+                                <div class="obs-text"><p>The space looked calm today.</p><p>There were fewer sudden movements.</p><p>The plastic cup was finally gone.</p><p>The bench appeared cleaner,</p><p>as if the area had been reset.</p><p>A patch of sunlight stayed on the seat longer than before.</p></div>
+                            </div>
+                            <div class="obs-block met-block">
+                                <h4>Met</h4>
+                                <div class="obs-text"><p>An older person sat on the opposite end of the bench.</p><p>We did not speak.</p><p>But the silence felt shared rather than empty.</p></div>
+                            </div>
+                            <div class="obs-block thought-block">
+                                <h4>Thought</h4>
+                                <div class="obs-text"><p>By today, I was thinking less about collecting ten sounds</p><p>and more about what it means to return somewhere on purpose.</p><p>The bench felt familiar enough</p><p>that even a small change mattered.</p><p>I also noticed that I felt calmer here than I expected.</p></div>
+                            </div>
+                        </div>
+                        <div class="pull-quote">
+                            <blockquote>"Familiarity made small changes feel surprisingly important."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="day-6" class="day-section" style="display: none;">
+                <div class="container">
+                    <div class="day-card">
+                        <div class="day-header">
+                            <h3 class="day-title">DAY 6</h3>
+                            <div class="day-meta">10:00 AM<br>Slightly cold, overcast</div>
+                        </div>
+                        <div class="day-content-grid">
+                            <div class="obs-block heard-block">
+                                <h4>Heard</h4>
+                                <ul><li>Fast footsteps cutting across the path.</li><li>A bicycle passing without a bell.</li><li>Someone sneezing twice.</li><li>A short conversation about class.</li><li>A bus door folding open.</li><li>A loose poster flapping in the wind.</li><li>Bird calls spaced far apart.</li><li>A hard object dropping into a bag.</li><li>Distant construction noise.</li><li>The quiet static of the surrounding city.</li></ul>
+                            </div>
+                            <div class="obs-block saw-block">
+                                <h4>Saw</h4>
+                                <div class="obs-text"><p>Today the place felt more functional than poetic.</p><p>People moved through it efficiently.</p><p>Fewer slowed down.</p><p>Fewer looked around.</p><p>The bench seemed less like a destination</p><p>and more like part of a route.</p><p>The sky flattened everything into pale, low contrast.</p></div>
+                            </div>
+                            <div class="obs-block met-block">
+                                <h4>Met</h4>
+                                <div class="obs-text"><p>No close interaction.</p><p>But by now I recognized different kinds of passersby:</p><p>the hurried walker,</p><p>the distracted phone user,</p><p>the quiet passerby,</p><p>the person who always seems late.</p></div>
+                            </div>
+                            <div class="obs-block thought-block">
+                                <h4>Thought</h4>
+                                <div class="obs-text"><p>Today I noticed my own drifting attention.</p><p>My focus kept breaking.</p><p>That, too, became part of the observation.</p><p>To notice a place</p><p>also means noticing when I fail to notice it fully.</p></div>
+                            </div>
+                        </div>
+                        <div class="pull-quote">
+                            <blockquote>"Observation is not constant focus; it also includes distraction, fatigue, and return."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="day-7" class="day-section" style="display: none;">
+                <div class="container">
+                    <div class="day-card">
+                        <div class="day-header">
+                            <h3 class="day-title">DAY 7</h3>
+                            <div class="day-meta">10:00 AM<br>Clear and balanced</div>
+                        </div>
+                        <div class="day-content-grid">
+                            <div class="obs-block heard-block">
+                                <h4>Heard</h4>
+                                <ul><li>Birds starting before most people arrived.</li><li>A bicycle bell again, echoing Day 1.</li><li>Even footsteps from someone walking calmly.</li><li>A backpack set down on the bench.</li><li>A bus braking in the distance.</li><li>Leaves shifting lightly.</li><li>Someone laughing into a phone.</li><li>Keys rattling.</li><li>Wind moving through the same branches I had heard all week.</li><li>A brief quiet moment before another wave of sound returned.</li></ul>
+                            </div>
+                            <div class="obs-block saw-block">
+                                <h4>Saw</h4>
+                                <div class="obs-text"><p>The bench no longer felt neutral.</p><p>It felt known.</p><p>I could immediately tell</p><p>what was different</p><p>and what remained the same.</p><p>The light, the path, the tree,</p><p>and the movement of people</p><p>all felt connected now.</p></div>
+                            </div>
+                            <div class="obs-block met-block">
+                                <h4>Met</h4>
+                                <div class="obs-text"><p>No dramatic encounter happened.</p><p>But repeated types of people</p><p>had turned the place into a scene populated by familiar strangers.</p><p>I understood the rhythm of the site better than I did on the first day.</p></div>
+                            </div>
+                            <div class="obs-block thought-block">
+                                <h4>Thought</h4>
+                                <div class="obs-text"><p>On the final day,</p><p>I understood that the project was never only about sound.</p><p>It was about returning.</p><p>Waiting.</p><p>Paying attention.</p><p>Letting a place reveal itself slowly.</p><p>The bench did not become more interesting.</p><p>I became better at noticing what had always been there.</p></div>
+                            </div>
+                        </div>
+                        <div class="pull-quote">
+                            <blockquote>"The biggest change across seven days was not the bench, but my attention."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        <div id="no-data" style="display: none; text-align: center; color: var(--text-muted); margin-top: 100px;">
+            <h2 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 20px;">No Observation Record</h2>
+            <p>There is no data for the selected date.</p>
+        </div>
+    </main>
 
-  
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const params = new URLSearchParams(window.location.search);
-        const dateParam = params.get("date");
-
-        const displayElement = document.getElementById("selected-date-display");
-        if (dateParam) {
-          displayElement.textContent = dateParam;
-        }
-      });
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const dayParam = params.get("day");
+            
+            const displayElement = document.getElementById("selected-date-display");
+            
+            if (dayParam) {
+                displayElement.textContent = `LOG: APRIL 0${dayParam}, 2026`;
+                const daySection = document.getElementById(`day-${dayParam}`);
+                if (daySection) {
+                    daySection.style.display = 'block';
+                    // Trigger reflow for animation
+                    setTimeout(() => daySection.classList.add('visible'), 50);
+                } else {
+                    document.getElementById('no-data').style.display = 'block';
+                }
+            } else {
+                displayElement.textContent = `LOG: UNDATED`;
+                document.getElementById('no-data').style.display = 'block';
+            }
+        });
     </script>
-  </body>
+</body>
 </html>
