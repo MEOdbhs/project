@@ -1,415 +1,70 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tuanyin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --paper: #f1e7cf;
-        --ink: rgba(28, 22, 16, 0.92);
-        --gold: #d5b36e;
-        --gold-2: #b68944;
-        --shadow: rgba(0, 0, 0, 0.42);
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html,
-      body {
-        height: 100%;
-      }
-
-      body {
-        margin: 0;
-        font-family: "Cinzel", serif;
-        color: var(--paper);
-        background: radial-gradient(1200px 800px at 20% 10%, rgba(213, 179, 110, 0.12), transparent 60%),
-          radial-gradient(900px 700px at 85% 78%, rgba(182, 137, 68, 0.12), transparent 60%),
-          linear-gradient(180deg, #0c0b0a 0%, #070606 50%, #060505 100%);
-        overflow-x: hidden;
-      }
-
-      .frame {
-        min-height: 100%;
-        display: grid;
-        place-items: center;
-        padding: 28px 18px 40px;
-      }
-
-      .map-shell {
-        width: 1180px;
-        max-width: min(1180px, 96vw);
-        aspect-ratio: 15175 / 14280;
-        position: relative;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 30px 80px var(--shadow);
-        outline: 1px solid rgba(213, 179, 110, 0.22);
-        background: #0b0a09;
-      }
-
-      .map-shell::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background: radial-gradient(1000px 700px at 20% 12%, rgba(255, 245, 220, 0.14), transparent 55%),
-          radial-gradient(900px 680px at 92% 86%, rgba(213, 179, 110, 0.12), transparent 60%),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.18));
-        mix-blend-mode: soft-light;
-        z-index: 4;
-      }
-
-      .map-bg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: translateZ(0);
-        z-index: 1;
-        user-select: none;
-        -webkit-user-drag: none;
-      }
-
-      .regions {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-      }
-
-      .region {
-        position: absolute;
-        transform: translateZ(0);
-        opacity: 0.96;
-        cursor: pointer;
-        transition: filter 180ms ease, opacity 180ms ease, transform 220ms ease;
-        will-change: transform, filter, opacity;
-        filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.35));
-      }
-
-      .region:hover {
-        opacity: 1;
-        transform: translateY(-1px);
-        filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.5)) saturate(1.08) brightness(1.03);
-      }
-
-      .region:active {
-        transform: translateY(0px) scale(0.99);
-      }
-
-      .tooltip {
-        position: absolute;
-        z-index: 6;
-        pointer-events: none;
-        opacity: 0;
-        transform: translate(-50%, calc(-100% - 12px));
-        transition: opacity 120ms ease, transform 120ms ease;
-        padding: 10px 12px 9px;
-        border-radius: 12px;
-        color: rgba(245, 233, 205, 0.98);
-        background: radial-gradient(120px 60px at 20% 20%, rgba(213, 179, 110, 0.22), rgba(0, 0, 0, 0.62) 70%),
-          rgba(0, 0, 0, 0.62);
-        border: 1px solid rgba(213, 179, 110, 0.22);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        font-weight: 600;
-        font-size: 12px;
-        backdrop-filter: blur(10px);
-        max-width: min(280px, 70vw);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .tooltip[data-show="true"] {
-        opacity: 1;
-        transform: translate(-50%, calc(-100% - 14px));
-      }
-
-      .tooltip::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 100%;
-        transform: translateX(-50%);
-        width: 10px;
-        height: 10px;
-        background: rgba(0, 0, 0, 0.62);
-        border-right: 1px solid rgba(213, 179, 110, 0.22);
-        border-bottom: 1px solid rgba(213, 179, 110, 0.22);
-        transform-origin: center;
-        transform: translateX(-50%) rotate(45deg);
-      }
-
-      .status {
-        position: absolute;
-        inset: 18px 18px auto;
-        z-index: 5;
-        display: inline-flex;
-        gap: 10px;
-        align-items: center;
-        padding: 10px 12px 9px;
-        border-radius: 14px;
-        background: rgba(0, 0, 0, 0.46);
-        border: 1px solid rgba(213, 179, 110, 0.22);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
-        color: rgba(245, 233, 205, 0.94);
-        letter-spacing: 0.05em;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        user-select: none;
-      }
-
-      .status i {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: linear-gradient(180deg, var(--gold), var(--gold-2));
-        box-shadow: 0 0 0 4px rgba(213, 179, 110, 0.12);
-      }
-
-      .status[data-state="ready"] i {
-        background: linear-gradient(180deg, rgba(147, 214, 181, 1), rgba(76, 163, 127, 1));
-        box-shadow: 0 0 0 4px rgba(76, 163, 127, 0.14);
-      }
-
-      .status[data-state="fail"] i {
-        background: linear-gradient(180deg, rgba(255, 136, 136, 1), rgba(216, 78, 78, 1));
-        box-shadow: 0 0 0 4px rgba(216, 78, 78, 0.14);
-      }
-
-      @media (max-width: 520px) {
-        .frame {
-          padding: 18px 12px 28px;
-        }
-        .status {
-          inset: 12px 12px auto;
-        }
-      }
-    </style>
+    <title>Document</title>
   </head>
+  <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+      padding: 0;
+    }
+    .bg-img,
+    .item-img {
+      width: 1500px;
+      height: 1000px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* 默认先隐藏区域图，避免未解码时卡顿 */
+    .item-img {
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .bg-img {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .bg-box {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      background-color: #232323; /* 加载时给个底色 */
+    }
+  </style>
   <body>
-    <div class="frame">
-      <div id="mapShell" class="map-shell">
-        <img id="mapBg" class="map-bg" src="./assets/all.jpg" alt="All" />
-        <div id="regions" class="regions" aria-label="regions"></div>
-        <div id="status" class="status" data-state="loading"><i></i><span>Locating regions…</span></div>
-        <div id="tooltip" class="tooltip"></div>
-      </div>
+    <div class="bg-box">
+      <!-- 优先加载背景并启用异步解码 -->
+      <img class="bg-img" fetchpriority="high" decoding="async" src="./assets/fextralife_map.jpg" alt="Background" />
+
+      <!-- 使用 loading="lazy" 和 decoding="async" 推迟前景图的解码和加载 -->
+      <img class="item-img" loading="lazy" decoding="async" src="./assets/ytgy.png" alt="Altus" onload="this.style.opacity=1" />
+      <img class="item-img" loading="lazy" decoding="async" src="./assets/nmgf.png" alt="Limgrave" onload="this.style.opacity=1" />
+      <img
+        class="item-img"
+        loading="lazy"
+        decoding="async"
+        src="./assets/jrgy.png"
+        alt="Mountaintops"
+        onload="this.style.opacity=1"
+      />
+      <img class="item-img" loading="lazy" decoding="async" src="./assets/hzlyny.png" alt="Liurnia" onload="this.style.opacity=1" />
+      <img class="item-img" loading="lazy" decoding="async" src="./assets/gld.png" alt="Caelid" onload="this.style.opacity=1" />
     </div>
-
-    <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
-    <script>
-      const regionFiles = [
-        "亚坛高原-Altus Plateau.png",
-        "宁姆格福-Limgrave.png",
-        "巨人山顶-Mountaintops of the Giants.png",
-        "湖之利耶尼亚-Liurnia of the Lakes.png",
-        "盖里德.png",
-      ];
-
-      function onRegionClick(filename) {
-        console.log("region click:", filename);
-      }
-
-      function loadImg(src) {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.decoding = "async";
-          img.loading = "eager";
-          img.crossOrigin = "Anonymous";
-          img.onload = () => resolve(img);
-          img.onerror = () => reject(new Error("load failed: " + src));
-          img.src = src;
-        });
-      }
-
-      function drawToCanvas(img, width, height) {
-        const canvas = document.createElement("canvas");
-        canvas.width = Math.max(1, Math.round(width));
-        canvas.height = Math.max(1, Math.round(height));
-        const ctx = canvas.getContext("2d", { willReadFrequently: true });
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        return canvas;
-      }
-
-      function toEdgeMat(canvas) {
-        const src = cv.imread(canvas);
-        const gray = new cv.Mat();
-        cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-        const blur = new cv.Mat();
-        cv.GaussianBlur(gray, blur, new cv.Size(3, 3), 0, 0, cv.BORDER_DEFAULT);
-        const edges = new cv.Mat();
-        cv.Canny(blur, edges, 40, 130);
-        src.delete();
-        gray.delete();
-        blur.delete();
-        return edges;
-      }
-
-      async function locateRegions() {
-        const mapShell = document.getElementById("mapShell");
-        const mapBg = document.getElementById("mapBg");
-        const regionsRoot = document.getElementById("regions");
-        const status = document.getElementById("status");
-
-        await new Promise((r) => {
-          if (mapBg.complete && mapBg.naturalWidth) return r();
-          mapBg.addEventListener("load", r, { once: true });
-        });
-
-        const displayW = mapShell.clientWidth;
-        const displayH = mapShell.clientHeight;
-        const scale = displayW / mapBg.naturalWidth;
-
-        const baseCanvas = drawToCanvas(mapBg, displayW, displayH);
-        const baseEdges = toEdgeMat(baseCanvas);
-
-        const results = [];
-        for (const filename of regionFiles) {
-          const src = "./assets/" + filename;
-          const img = await loadImg(src);
-          const tW = img.naturalWidth * scale;
-          const tH = img.naturalHeight * scale;
-          const tCanvas = drawToCanvas(img, tW, tH);
-          const templEdges = toEdgeMat(tCanvas);
-
-          const resultCols = baseEdges.cols - templEdges.cols + 1;
-          const resultRows = baseEdges.rows - templEdges.rows + 1;
-          const result = new cv.Mat(resultRows, resultCols, cv.CV_32FC1);
-          cv.matchTemplate(baseEdges, templEdges, result, cv.TM_CCOEFF_NORMED);
-          const mm = cv.minMaxLoc(result);
-
-          results.push({
-            filename,
-            x: mm.maxLoc.x,
-            y: mm.maxLoc.y,
-            w: Math.round(tW),
-            h: Math.round(tH),
-            score: mm.maxVal,
-          });
-
-          result.delete();
-          templEdges.delete();
-        }
-
-        baseEdges.delete();
-
-        console.table(results);
-
-        regionsRoot.innerHTML = "";
-        for (const r of results) {
-          const el = document.createElement("img");
-          el.className = "region";
-          el.src = "./assets/" + r.filename;
-          el.alt = r.filename;
-          el.style.left = r.x + "px";
-          el.style.top = r.y + "px";
-          el.style.width = r.w + "px";
-          el.style.height = r.h + "px";
-          el.dataset.filename = r.filename;
-          el.dataset.score = String(r.score);
-          el.addEventListener("click", () => onRegionClick(r.filename));
-          regionsRoot.appendChild(el);
-        }
-
-        status.dataset.state = "ready";
-        status.querySelector("span").textContent = "Ready";
-      }
-
-      function setupTooltip() {
-        const tooltip = document.getElementById("tooltip");
-        const mapShell = document.getElementById("mapShell");
-        let active = null;
-
-        function hide() {
-          tooltip.dataset.show = "false";
-          active = null;
-        }
-
-        mapShell.addEventListener("mouseleave", hide);
-        mapShell.addEventListener("mousemove", (e) => {
-          if (!active) return;
-          const rect = mapShell.getBoundingClientRect();
-          tooltip.style.left = e.clientX - rect.left + "px";
-          tooltip.style.top = e.clientY - rect.top + "px";
-        });
-
-        mapShell.addEventListener(
-          "mouseover",
-          (e) => {
-            const target = e.target;
-            if (!(target instanceof HTMLImageElement)) return;
-            if (!target.classList.contains("region")) return;
-            active = target;
-            tooltip.textContent = target.dataset.filename || "";
-            tooltip.dataset.show = "true";
-          },
-          true
-        );
-
-        mapShell.addEventListener(
-          "mouseout",
-          (e) => {
-            const target = e.target;
-            if (!(target instanceof HTMLImageElement)) return;
-            if (!target.classList.contains("region")) return;
-            hide();
-          },
-          true
-        );
-      }
-
-      function waitForCv() {
-        return new Promise((resolve, reject) => {
-          const startedAt = Date.now();
-          const timer = setInterval(() => {
-            if (typeof cv !== "undefined" && cv && cv.Mat) {
-              clearInterval(timer);
-              resolve();
-              return;
-            }
-            if (typeof cv !== "undefined" && cv && !cv.Mat && cv.onRuntimeInitialized) {
-              clearInterval(timer);
-              cv.onRuntimeInitialized = resolve;
-              return;
-            }
-            if (Date.now() - startedAt > 15000) {
-              clearInterval(timer);
-              reject(new Error("opencv timeout"));
-            }
-          }, 50);
-        });
-      }
-
-      async function boot() {
-        setupTooltip();
-        const status = document.getElementById("status");
-        try {
-          await waitForCv();
-          await locateRegions();
-        } catch (err) {
-          console.error(err);
-          status.dataset.state = "fail";
-          status.querySelector("span").textContent = "Failed";
-        }
-      }
-
-      boot();
-    </script>
   </body>
+  <script>
+    const itemImgName = [
+      "亚坛高原-Altus Plateau",
+      "宁姆格福-Limgrave",
+      "巨人山顶-Mountaintops of the Giants",
+      "湖之利耶尼亚-Liurnia of the Lakes",
+      "盖里德.png",
+    ];
+  </script>
 </html>
