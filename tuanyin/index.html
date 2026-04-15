@@ -4,15 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet" />
   </head>
   <style>
     * {
       margin: 0;
       box-sizing: border-box;
       padding: 0;
+      font-family: "Cinzel", serif;
+      font-optical-sizing: auto;
+      font-weight: normal;
+      font-style: normal;
     }
-    .bg-img,
-    .item-img {
+    .bg-img {
       width: 1500px;
       height: 1000px;
       position: absolute;
@@ -21,10 +27,34 @@
       transform: translate(-50%, -50%);
     }
 
-    /* 默认先隐藏区域图，避免未解码时卡顿 */
     .item-img {
+      width: 50px;
+      height: 50px;
       opacity: 0;
       transition: opacity 0.5s;
+      position: absolute;
+      top: 30px;
+      left: 40px;
+    }
+    .item1 {
+      top: 300px;
+      left: 1235px;
+    }
+    .item2 {
+      top: 430px;
+      left: 845px;
+    }
+    .item3 {
+      top: 594px;
+      left: 640px;
+    }
+    .item4 {
+      top: 850px;
+      left: 967px;
+    }
+    .item5 {
+      top: 788px;
+      left: 1182px;
     }
     .bg-img {
       border-radius: 8px;
@@ -35,36 +65,20 @@
       height: 100vh;
       overflow: hidden;
       position: relative;
-      background-color: #232323; /* 加载时给个底色 */
+      background-color: #232323;
     }
   </style>
   <body>
     <div class="bg-box">
-      <!-- 优先加载背景并启用异步解码 -->
       <img class="bg-img" fetchpriority="high" decoding="async" src="./assets/fextralife_map.jpg" alt="Background" />
-
-      <!-- 使用 loading="lazy" 和 decoding="async" 推迟前景图的解码和加载 -->
-      <img class="item-img" loading="lazy" decoding="async" src="./assets/ytgy.png" alt="Altus" onload="this.style.opacity=1" />
-      <img class="item-img" loading="lazy" decoding="async" src="./assets/nmgf.png" alt="Limgrave" onload="this.style.opacity=1" />
-      <img
-        class="item-img"
-        loading="lazy"
-        decoding="async"
-        src="./assets/jrgy.png"
-        alt="Mountaintops"
-        onload="this.style.opacity=1"
-      />
-      <img class="item-img" loading="lazy" decoding="async" src="./assets/hzlyny.png" alt="Liurnia" onload="this.style.opacity=1" />
-      <img class="item-img" loading="lazy" decoding="async" src="./assets/gld.png" alt="Caelid" onload="this.style.opacity=1" />
+      <img class="item-img item1" loading="lazy" decoding="async" src="./assets/mark.png" alt="" onload="this.style.opacity=1" />
+      <img class="item-img item2" loading="lazy" decoding="async" src="./assets/mark.png" alt="" onload="this.style.opacity=1" />
+      <img class="item-img item3" loading="lazy" decoding="async" src="./assets/mark.png" alt="" onload="this.style.opacity=1" />
+      <img class="item-img item4" loading="lazy" decoding="async" src="./assets/mark.png" alt="" onload="this.style.opacity=1" />
+      <img class="item-img item5" loading="lazy" decoding="async" src="./assets/mark.png" alt="" onload="this.style.opacity=1" />
     </div>
   </body>
   <script>
-    const itemImgName = [
-      "亚坛高原-Altus Plateau",
-      "宁姆格福-Limgrave",
-      "巨人山顶-Mountaintops of the Giants",
-      "湖之利耶尼亚-Liurnia of the Lakes",
-      "盖里德.png",
-    ];
+    const itemImgName = ["Mountaintops of the Giants", "Altus Plateau", "Liurnia of the Lakes", "Limgrave", "Caelid"];
   </script>
 </html>
