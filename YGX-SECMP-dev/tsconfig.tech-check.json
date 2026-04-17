@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/views/DataIntelligence/index.vue",
+    "src/views/DynamicRisk/**/index.vue",
+    "src/views/MonitoringSurveillance/**/index.vue",
+    "src/views/MonitoringSurveillance/**/components/*.vue",
+    "types/**/*.d.ts"
+  ]
+}
+

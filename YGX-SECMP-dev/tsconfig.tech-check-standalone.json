@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "types": ["vite/client"],
+    "typeRoots": ["./node_modules/@types/", "./types", "./node_modules"],
+    "paths": {
+      "/@/*": ["src/*"],
+      "/#/*": ["types/*"],
+      "@/*": ["src/*"],
+      "#/*": ["types/*"]
+    }
+  },
+  "include": [
+    "src/views/DataIntelligence/index.vue",
+    "src/views/DynamicRisk/**/index.vue",
+    "src/views/MonitoringSurveillance/**/index.vue",
+    "src/views/MonitoringSurveillance/**/components/*.vue",
+    "types/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
+
