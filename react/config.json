@@ -1,0 +1,35 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "src": "src/pages/Index.tsx"
+    }
+  ],
+  "components": [
+    {
+      "name": "SideNav",
+      "src": "src/components/SideNav.tsx",
+      "route": "/preview/side-nav"
+    },
+    {
+      "name": "TechCard",
+      "src": "src/components/TechCard.tsx",
+      "route": "/preview/tech-card"
+    },
+    {
+      "name": "TechFilter",
+      "src": "src/components/TechFilter.tsx",
+      "route": "/preview/tech-filter"
+    },
+    {
+      "name": "TechTable",
+      "src": "src/components/TechTable.tsx",
+      "route": "/preview/tech-table"
+    },
+    {
+      "name": "TopNav",
+      "src": "src/components/TopNav.tsx",
+      "route": "/preview/top-nav"
+    }
+  ]
+}

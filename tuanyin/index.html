@@ -25,6 +25,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      z-index: 1;
     }
 
     .item-img {
@@ -35,6 +36,10 @@
       position: absolute;
       top: 30px;
       left: 40px;
+      z-index: 2;
+      transform-origin: 50% 90%;
+      animation: markerLive 1.8s ease-in-out infinite;
+      cursor: pointer;
     }
     .item1 {
       top: 300px;
@@ -67,18 +72,118 @@
       position: relative;
       background-color: #232323;
     }
+
+    @keyframes markerLive {
+      0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(255, 220, 140, 0));
+      }
+      45% {
+        transform: scale(1.18);
+        filter: drop-shadow(0 0 10px rgba(255, 220, 140, 0.85));
+      }
+      55% {
+        transform: scale(1.12);
+        filter: drop-shadow(0 0 6px rgba(255, 220, 140, 0.6));
+      }
+      100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(255, 220, 140, 0));
+      }
+    }
+
+    .item-tooltip {
+      position: fixed;
+      z-index: 20;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      background: rgba(18, 14, 9, 0.92);
+      border: 1px solid rgba(235, 204, 141, 0.65);
+      color: #f4e6c8;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 14px;
+      letter-spacing: 0.35px;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.85);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      max-width: 260px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .item-tooltip.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
   <body>
     <div class="bg-box">
       <img class="bg-img" fetchpriority="high" decoding="async" src="./assets/fextralife_map.jpg" alt="Background" />
-      <img class="item-img item1" loading="lazy" decoding="async" src="./assets/mark.png" alt="" onload="this.style.opacity=1" />
-      <img class="item-img item2" loading="lazy" decoding="async" src="./assets/mark.png" alt="" onload="this.style.opacity=1" />
-      <img class="item-img item3" loading="lazy" decoding="async" src="./assets/mark.png" alt="" onload="this.style.opacity=1" />
-      <img class="item-img item4" loading="lazy" decoding="async" src="./assets/mark.png" alt="" onload="this.style.opacity=1" />
-      <img class="item-img item5" loading="lazy" decoding="async" src="./assets/mark.png" alt="" onload="this.style.opacity=1" />
+      <img class="item-img item1" loading="lazy" decoding="async" src="./assets/mark.png" alt="" data-index="0" onload="this.style.opacity=1" />
+      <img class="item-img item2" loading="lazy" decoding="async" src="./assets/mark.png" alt="" data-index="1" onload="this.style.opacity=1" />
+      <img class="item-img item3" loading="lazy" decoding="async" src="./assets/mark.png" alt="" data-index="2" onload="this.style.opacity=1" />
+      <img class="item-img item4" loading="lazy" decoding="async" src="./assets/mark.png" alt="" data-index="3" onload="this.style.opacity=1" />
+      <img class="item-img item5" loading="lazy" decoding="async" src="./assets/mark.png" alt="" data-index="4" onload="this.style.opacity=1" />
     </div>
   </body>
   <script>
     const itemImgName = ["Mountaintops of the Giants", "Altus Plateau", "Liurnia of the Lakes", "Limgrave", "Caelid"];
+
+    function onMarkerClick(index, e) {
+      console.log(index, e, "点击了");
+      if (index == 1) {
+        window.open("你的url", "_blank");
+      }
+    }
+
+    const tooltipEl = document.createElement("div");
+    tooltipEl.className = "item-tooltip";
+    document.body.appendChild(tooltipEl);
+
+    function positionTooltip(targetEl) {
+      const rect = targetEl.getBoundingClientRect();
+      const padding = 10;
+      const x = rect.left + rect.width / 2;
+
+      tooltipEl.style.left = "0px";
+      tooltipEl.style.top = "0px";
+
+      const tipRect = tooltipEl.getBoundingClientRect();
+
+      let left = x - tipRect.width / 2;
+      left = Math.max(padding, Math.min(left, window.innerWidth - tipRect.width - padding));
+
+      let top = rect.top - tipRect.height - 12;
+      if (top < padding) top = rect.bottom + 12;
+
+      tooltipEl.style.left = `${left}px`;
+      tooltipEl.style.top = `${top}px`;
+    }
+
+    function showTooltip(targetEl) {
+      const index = Number(targetEl.dataset.index);
+      const text = itemImgName[index] ?? "";
+      if (!text) return;
+
+      tooltipEl.textContent = text;
+      tooltipEl.classList.add("is-visible");
+      positionTooltip(targetEl);
+    }
+
+    function hideTooltip() {
+      tooltipEl.classList.remove("is-visible");
+    }
+
+    document.querySelectorAll(".item-img").forEach((el) => {
+      el.addEventListener("mouseenter", () => showTooltip(el));
+      el.addEventListener("mousemove", () => positionTooltip(el));
+      el.addEventListener("mouseleave", hideTooltip);
+      el.addEventListener("click", (e) => {
+        const index = Number(el.dataset.index);
+        onMarkerClick(index, e);
+      });
+    });
   </script>
 </html>

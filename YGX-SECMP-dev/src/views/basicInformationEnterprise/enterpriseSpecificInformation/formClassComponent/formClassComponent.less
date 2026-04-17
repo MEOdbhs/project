@@ -1,0 +1,157 @@
+// ============================================================
+//  企业信息维护模块 — 公用深色表单样式
+//  所有 Tab 表单组件统一 @import 此文件
+// ============================================================
+
+.tab-form-wrap {
+  padding: 20px 28px;
+  height: 100%;
+  overflow-y: auto;
+  background: #002140;
+
+  // label 文字（vertical 布局：label 在输入框上方）
+  :deep(.ant-form-item-label) {
+    padding-bottom: 4px;
+
+    > label {
+      color: #8fbcdb;
+      font-size: 13px;
+      height: auto;
+
+      // vertical 模式下隐藏尾部冒号
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  // label 旁的 tips 问号图标
+  .label-tip-icon {
+    margin-left: 4px;
+    color: #40a9ff;
+    font-size: 13px;
+    cursor: help;
+    vertical-align: middle;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // vertical 布局下 form-item 底部间距
+  :deep(.ant-form-item) {
+    margin-bottom: 16px;
+  }
+
+  // 分组标题
+  :deep(.ant-divider-inner-text) {
+    color: #40a9ff;
+    font-weight: 600;
+  }
+
+  :deep(.ant-divider) {
+    border-color: #0d3a5e;
+  }
+
+  // 输入框 / 数字框 / 日期选择 / 下拉选择
+  :deep(.ant-input),
+  :deep(.ant-input-number),
+  :deep(.ant-picker),
+  :deep(.ant-select:not(.ant-select-disabled) .ant-select-selector) {
+    background: #001e38;
+    border-color: #1d4068;
+    color: #c8dff0;
+  }
+
+  :deep(.ant-input::placeholder),
+  :deep(.ant-input-number-input::placeholder) {
+    color: #3a6080;
+  }
+
+  :deep(.ant-select-selection-placeholder) {
+    color: #3a6080;
+  }
+
+  :deep(.ant-input-number-handler-wrap) {
+    background: #001e38;
+    border-color: #1d4068;
+  }
+
+  :deep(.ant-picker-suffix),
+  :deep(.ant-select-arrow) {
+    color: #3a6080;
+  }
+
+  // ---- 列表型 Tab 公用样式 ----
+  .list-tab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    .list-tab-title {
+      color: #40a9ff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  :deep(.ant-table) {
+    background: #001e38;
+    color: #c8dff0;
+
+    .ant-table-thead > tr > th {
+      background: #002d57;
+      color: #8fbcdb;
+      border-color: #0d3a5e;
+      font-size: 13px;
+    }
+
+    .ant-table-tbody > tr > td {
+      border-color: #0d3a5e;
+      background: #001e38;
+      color: #c8dff0;
+    }
+
+    .ant-table-tbody > tr:hover > td {
+      background: #002140;
+    }
+
+    .ant-table-placeholder {
+      background: #001e38;
+      color: #3a6080;
+    }
+  }
+
+  // 弹窗内的表单（vertical 布局）
+  .row-edit-form {
+    padding: 16px 24px 4px;
+
+    :deep(.ant-form-item) {
+      margin-bottom: 14px;
+    }
+
+    :deep(.ant-form-item-label) {
+      padding-bottom: 4px;
+
+      > label {
+        color: #262626;
+        font-size: 13px;
+        height: auto;
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    :deep(.ant-input),
+    :deep(.ant-input-number),
+    :deep(.ant-picker),
+    :deep(.ant-select:not(.ant-select-disabled) .ant-select-selector) {
+      width: 100%;
+    }
+  }
+}

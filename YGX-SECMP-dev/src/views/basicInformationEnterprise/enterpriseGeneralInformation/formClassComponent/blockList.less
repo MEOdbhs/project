@@ -1,0 +1,92 @@
+// ============================================================
+//  展开块列表 — 公用样式（WasteDump / Outsource / Mining / DzExploration / RiskControl）
+// ============================================================
+
+.block-list-wrap {
+  .record-block {
+    margin-bottom: 16px;
+    border: 1px solid #1d4068;
+    border-radius: 6px;
+    overflow: hidden;
+
+    .block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      background: #002d57;
+      border-bottom: 1px solid #1d4068;
+
+      .block-title {
+        color: #8fbcdb;
+        font-size: 13px;
+        font-weight: 600;
+      }
+    }
+
+    .block-body {
+      padding: 16px;
+      background: #001e38;
+
+      .field-wrap {
+        margin-bottom: 14px;
+
+        .field-label {
+          color: #8fbcdb;
+          font-size: 13px;
+          margin-bottom: 6px;
+
+          &.required-label::before {
+            content: '*';
+            color: #ff4d4f;
+            margin-right: 4px;
+          }
+        }
+
+        :deep(.ant-input),
+        :deep(.ant-input-number),
+        :deep(.ant-picker),
+        :deep(.ant-select:not(.ant-select-disabled) .ant-select-selector) {
+          background: #001e38;
+          border-color: #1d4068;
+          color: #c8dff0;
+          width: 100%;
+        }
+
+        :deep(textarea.ant-input) {
+          background: #001e38;
+          border-color: #1d4068;
+          color: #c8dff0;
+        }
+
+        :deep(.ant-input::placeholder),
+        :deep(.ant-input-number-input::placeholder) {
+          color: #3a6080;
+        }
+
+        :deep(.ant-select-selection-placeholder) {
+          color: #3a6080;
+        }
+
+        :deep(.ant-radio-wrapper) {
+          color: #c8dff0;
+        }
+      }
+    }
+  }
+
+  .add-btn-wrap {
+    margin-top: 8px;
+
+    :deep(.ant-btn-dashed) {
+      background: transparent;
+      border-color: #1d4068;
+      color: #40a9ff;
+
+      &:hover {
+        border-color: #40a9ff;
+        color: #69c0ff;
+      }
+    }
+  }
+}
