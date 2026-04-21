@@ -439,6 +439,28 @@ h1, h2, h3, h4, h5 {
     line-height: 1.5;
 }
 
+.day-image {
+    width: 100%;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--panel-border);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.day-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 500px;
+    transition: transform 0.5s ease;
+}
+
+.day-image:hover img {
+    transform: scale(1.02);
+}
+
 .day-content-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
