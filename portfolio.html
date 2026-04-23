@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quanyi Li - Projects Index</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS Variables */
+    :root {
+      --bg-color: #050505;
+      --text-primary: #EAEAEA;
+      --text-secondary: #888888;
+      --text-muted: #555555;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-light: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Global Styles */
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    ::selection {
+      background: var(--text-primary);
+      color: var(--bg-color);
+    }
+
+    .font-serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .font-sans {
+      font-family: 'Inter', sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Layout */
+    .container {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 5rem 4rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        padding: 5rem 6rem;
+      }
+    }
+
+    /* Animation Classes */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98), 
+                  transform 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 2rem;
+      margin-bottom: 6rem;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      header {
+        flex-direction: row;
+        align-items: flex-end;
+        margin-bottom: 8rem;
+      }
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .logo-container img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border-light);
+    }
+
+    h1 {
+      font-size: 3rem;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      font-weight: 400;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 4.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      h1 {
+        font-size: 5rem;
+      }
+    }
+
+    .info-group {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    @media (min-width: 768px) {
+      .info-group {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-label {
+      font-size: 0.625rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .info-value {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    @media (min-width: 768px) {
+      .info-value {
+        font-size: 1rem;
+      }
+    }
+
+    /* Main Section */
+    .section-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+    }
+
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    /* Hover effect: Dim other items when hovering the list */
+    .project-list:hover .project-link {
+      opacity: 0.3;
+    }
+
+    .project-item {
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+    }
+
+    .project-item:last-child {
+      border-bottom: none;
+    }
+
+    .project-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 0;
+      width: 100%;
+      transition: opacity 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .project-link {
+        padding: 3rem 0;
+      }
+    }
+
+    /* Hover effect: Keep the hovered item fully opaque */
+    .project-list .project-link:hover {
+      opacity: 1 !important;
+    }
+
+    .project-info {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (min-width: 768px) {
+      .project-info {
+        gap: 3rem;
+      }
+    }
+
+    .project-number {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    @media (min-width: 768px) {
+      .project-number {
+        font-size: 1rem;
+      }
+    }
+
+    .project-title {
+      font-size: 1.875rem;
+      transition: all 0.5s ease-out;
+    }
+
+    @media (min-width: 768px) {
+      .project-title {
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .project-title {
+        font-size: 3.75rem;
+      }
+    }
+
+    /* Italic and transform on hover */
+    .project-link:hover .project-title {
+      font-style: italic;
+      transform: translateX(0.5rem);
+    }
+
+    /* Animated Icon Wrapper */
+    .project-icon-wrapper {
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      transition: background-color 0.5s, border-color 0.5s;
+    }
+
+    @media (min-width: 768px) {
+      .project-icon-wrapper {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+
+    .project-link:hover .project-icon-wrapper {
+      background-color: var(--text-primary);
+      border-color: var(--text-primary);
+    }
+
+    .project-icon {
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transition: transform 0.5s ease-out;
+    }
+
+    @media (min-width: 768px) {
+      .project-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+    .icon-default {
+      stroke: var(--text-primary);
+    }
+
+    .icon-hover {
+      stroke: var(--bg-color);
+      transform: translate(-100%, 100%);
+    }
+
+    .project-link:hover .icon-default {
+      transform: translate(100%, -100%);
+    }
+
+    .project-link:hover .icon-hover {
+      transform: translate(0, 0);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 1.5s;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header Section -->
+    <header>
+      <div class="header-left">
+        <!-- Logo Added Here -->
+        <div class="logo-container fade-in-up">
+          <img src="logo.png" alt="Quanyi Li Logo">
+        </div>
+        <h1 class="font-serif fade-in-up">Quanyi Li</h1>
+      </div>
+      
+      <div class="info-group fade-in-up">
+        <div class="info-item">
+          <span class="info-label font-sans">Course</span>
+          <span class="info-value font-sans">IXP2</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label font-sans">Semester</span>
+          <span class="info-value font-sans">Spring 2026</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Projects Section -->
+    <main>
+      <h2 class="section-title font-sans fade-in-up">Selected Works</h2>
+
+      <ul class="project-list">
+        <!-- Project 1 -->
+        <li class="project-item fade-in-up">
+          <a href="https://qli14-dev.github.io/project1/" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project-info">
+              <span class="project-number font-sans">01</span>
+              <span class="project-title font-serif">Project 1</span>
+            </div>
+            <div class="project-icon-wrapper">
+              <!-- ArrowUpRight SVG from Lucide -->
+              <svg class="project-icon icon-default" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+              <svg class="project-icon icon-hover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </a>
+        </li>
+        
+        <!-- Project 2 -->
+        <li class="project-item fade-in-up">
+          <a href="https://qli14-dev.github.io/css-2/" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project-info">
+              <span class="project-number font-sans">02</span>
+              <span class="project-title font-serif">Project 2</span>
+            </div>
+            <div class="project-icon-wrapper">
+              <svg class="project-icon icon-default" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+              <svg class="project-icon icon-hover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </a>
+        </li>
+
+        <!-- Project 3 -->
+        <li class="project-item fade-in-up">
+          <a href="https://qli14-dev.github.io/ixp2project3/" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project-info">
+              <span class="project-number font-sans">03</span>
+              <span class="project-title font-serif">Project 3</span>
+            </div>
+            <div class="project-icon-wrapper">
+              <svg class="project-icon icon-default" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+              <svg class="project-icon icon-hover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </a>
+        </li>
+
+        <!-- Project 4 -->
+        <li class="project-item fade-in-up">
+          <a href="https://qli14-dev.github.io/0331/" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project-info">
+              <span class="project-number font-sans">04</span>
+              <span class="project-title font-serif">Project 4</span>
+            </div>
+            <div class="project-icon-wrapper">
+              <svg class="project-icon icon-default" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+              <svg class="project-icon icon-hover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </a>
+        </li>
+
+        <!-- Final Project -->
+        <li class="project-item fade-in-up">
+          <a href="https://qli14-dev.github.io/ixp-final-project/" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project-info">
+              <span class="project-number font-sans">05</span>
+              <span class="project-title font-serif">Final Project</span>
+            </div>
+            <div class="project-icon-wrapper">
+              <svg class="project-icon icon-default" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+              <svg class="project-icon icon-hover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <span class="font-sans">© 2026</span>
+      <span class="font-sans">Portfolio Index</span>
+    </footer>
+  </div>
+
+  <!-- JavaScript for entrance animation -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Get all elements that need to animate in
+      const elements = document.querySelectorAll('.fade-in-up');
+      
+      // Stagger the animations
+      elements.forEach((el, index) => {
+        setTimeout(() => {
+          el.classList.add('visible');
+        }, 150 + (index * 100)); // 150ms base delay, 100ms stagger per item
+      });
+    });
+  </script>
+</body>
+</html>
